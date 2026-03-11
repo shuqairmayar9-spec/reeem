@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الخدمات - فندق الحيوانات الفاخر</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f5efe6 0%, #e8d9c5 100%);
+            min-height: 100vh;
+            color: #1a2b3c;
+        }
+
+        :root {
+            --honey: #D4A373;
+            --honey-light: #E9C9A9;
+            --honey-dark: #B97D4A;
+            --navy: #1A2B3C;
+            --navy-light: #2C3E50;
+            --navy-dark: #0F1A24;
+            --cream: #FAF3E8;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--honey);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--honey), var(--honey-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: var(--navy);
+            border: 3px solid var(--cream);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-icon:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .logo-text {
+            color: var(--honey-light);
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            color: var(--honey);
+            font-size: 18px;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background-color: var(--honey);
+            color: var(--navy-dark);
+            transform: translateY(-2px);
+        }
+
+        .page-header {
+            background: linear-gradient(rgba(26, 43, 60, 0.9), rgba(26, 43, 60, 0.9));
+            padding: 60px 5%;
+            text-align: center;
+            color: var(--cream);
+            border-bottom: 5px solid var(--honey);
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+        }
+
+        .page-header h1 span {
+            color: var(--honey);
+        }
+
+        .page-header p {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        .services-section {
+            padding: 80px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 30px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            border-color: var(--honey);
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--honey-light), var(--honey));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 40px;
+            color: var(--navy);
+            border: 4px solid var(--navy);
+        }
+
+        .service-card h3 {
+            font-size: 24px;
+            color: var(--navy);
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: #666;
+        }
+
+        /* ===== نظام التقييمات ===== */
+        .reviews-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 3px solid var(--honey);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--navy);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2 span {
+            color: var(--honey);
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--honey);
+        }
+
+        /* إحصائيات التقييمات */
+        .rating-stats {
+            background: linear-gradient(135deg, var(--navy), var(--navy-dark));
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            color: white;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 15px;
+        }
+
+        .stat-number {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--honey);
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: var(--cream);
+        }
+
+        .average-stars {
+            color: #ffc107;
+            font-size: 24px;
+            margin-top: 5px;
+        }
+
+        /* نظام النجوم */
+        .rating-container {
+            background: var(--cream);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 2px solid var(--honey);
+        }
+
+        .rating-title {
+            font-size: 22px;
+            color: var(--navy);
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .stars {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stars input {
+            display: none;
+        }
+
+        .stars label {
+            font-size: 40px;
+            color: #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .stars label:hover,
+        .stars label:hover ~ label,
+        .stars input:checked ~ label {
+            color: #ffc107;
+            transform: scale(1.1);
+        }
+
+        .rating-text {
+            text-align: center;
+            font-size: 18px;
+            color: var(--navy);
+        }
+
+        /* نموذج الإضافة */
+        .comment-form {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 2px solid var(--honey);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--navy);
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 15px;
+            font-size: 16px;
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--honey);
+            box-shadow: 0 0 0 4px rgba(212, 163, 115, 0.2);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--navy), var(--navy-dark));
+            color: var(--honey);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 40px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid var(--honey);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            background: var(--honey);
+            color: var(--navy);
+            transform: translateY(-3px);
+        }
+
+        /* بطاقات التقييمات */
+        .reviews-grid {
+            margin-top: 30px;
+        }
+
+        .review-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 2px solid var(--honey-light);
+            transition: all 0.3s ease;
+        }
+
+        .review-card:hover {
+            transform: translateX(-5px);
+            border-color: var(--honey);
+            box-shadow: 0 10px 25px rgba(212, 163, 115, 0.2);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .reviewer-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .reviewer-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--honey-light), var(--honey));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--navy);
+            border: 2px solid var(--navy);
+        }
+
+        .reviewer-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        .review-date {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .review-stars {
+            color: #ffc107;
+            font-size: 18px;
+        }
+
+        .review-text {
+            color: #555;
+            line-height: 1.8;
+            font-size: 16px;
+            margin-right: 65px;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--navy);
+            color: var(--cream);
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: 2px solid var(--honey);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 9999;
+            animation: slideDown 0.5s ease;
+            display: none;
+        }
+
+        @keyframes slideDown {
+            from { top: -100px; opacity: 0; }
+            to { top: 20px; opacity: 1; }
+        }
+
+        .back-home {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .back-home a {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--navy);
+            color: var(--cream);
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .back-home a:hover {
+            background: var(--honey);
+            color: var(--navy);
+        }
+
+        .footer {
+            background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+            color: var(--cream);
+            padding: 40px 5%;
+            text-align: center;
+            border-top: 5px solid var(--honey);
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-paw"></i>
+            </div>
+            <div class="logo-text">
+                فندق الحيوانات
+                <span>Luxury Pet Hotel</span>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="services.html" class="active">الخدمات</a>
+            <a href="booking.html">الحجوزات</a>
+            <a href="gallery.html">معرض الكلاب</a>
+            <a href="about.html">من نحن</a>
+            <a href="faq.html">الأسئلة</a>
+            <a href="offers.html">العروض</a>
+            <a href="contact.html">اتصل بنا</a>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>خدماتنا <span>الفاخرة</span></h1>
+    </div>
+
+    <section class="services-section">
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-utensils"></i></div>
+                <h3>تغذية خاصة</h3>
+                <p>وجبات محضرة بعناية من قبل أمهر الطهاة</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-bath"></i></div>
+                <h3>سبا واستحمام</h3>
+                <p>جلسات استرخاء وتدليك بمنتجات طبيعية</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-dumbbell"></i></div>
+                <h3>نادي رياضي</h3>
+                <p>مدربون متخصصون لتمارين اللياقة</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-stethoscope"></i></div>
+                <h3>رعاية صحية</h3>
+                <p>فريق طبي بيطري متكامل 24/7</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== نظام التقييمات ===== -->
+    <div class="reviews-container">
+        <div class="section-title">
+            <h2>تقييمات <span>العملاء</span></h2>
+        </div>
+
+        <!-- إشعار -->
+        <div id="notification" class="notification">
+            <i class="fas fa-check-circle" style="color: var(--honey); margin-left: 10px;"></i>
+            <span id="notification-message">تم إضافة تقييمك بنجاح</span>
+        </div>
+
+        <!-- إحصائيات التقييمات -->
+        <div class="rating-stats">
+            <div class="stat-item">
+                <div class="stat-number" id="total-reviews">3</div>
+                <div class="stat-label">تقييم</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="average-rating">4.7</div>
+                <div class="stat-label">متوسط التقييم</div>
+                <div class="average-stars" id="average-stars">★★★★★</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="five-star">2</div>
+                <div class="stat-label">تقييم 5 نجوم</div>
+            </div>
+        </div>
+
+        <!-- نظام التقييم بالنجوم -->
+        <div class="rating-container">
+            <div class="rating-title">قيم تجربتك مع خدماتنا</div>
+            <div class="stars">
+                <input type="radio" name="rating" id="star5" value="5">
+                <label for="star5"><i class="fas fa-star"></i></label>
+                <input type="radio" name="rating" id="star4" value="4">
+                <label for="star4"><i class="fas fa-star"></i></label>
+                <input type="radio" name="rating" id="star3" value="3">
+                <label for="star3"><i class="fas fa-star"></i></label>
+                <input type="radio" name="rating" id="star2" value="2">
+                <label for="star2"><i class="fas fa-star"></i></label>
+                <input type="radio" name="rating" id="star1" value="1">
+                <label for="star1"><i class="fas fa-star"></i></label>
+            </div>
+            <div class="rating-text" id="selected-rating">اختر عدد النجوم</div>
+        </div>
+
+        <!-- نموذج إضافة تعليق -->
+        <div class="comment-form">
+            <div class="form-group">
+                <label><i class="fas fa-user" style="color: var(--honey); margin-left: 8px;"></i> الاسم</label>
+                <input type="text" id="reviewer-name" placeholder="اكتب اسمك">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-comment" style="color: var(--honey); margin-left: 8px;"></i> التقييم</label>
+                <textarea id="review-text" placeholder="اكتب تقييمك هنا..."></textarea>
+            </div>
+            <button class="submit-btn" onclick="addReview()">
+                <i class="fas fa-paper-plane"></i>
+                إضافة التقييم
+            </button>
+        </div>
+
+        <!-- عرض التقييمات -->
+        <div class="reviews-grid" id="reviews-container">
+            <!-- التقييمات تظهر هنا عبر JavaScript -->
+        </div>
+    </div>
+
+    <div class="back-home">
+        <a href="index.html">العودة للرئيسية</a>
+    </div>
+
+    <footer class="footer">
+        <p>جميع الحقوق محفوظة &copy; 2024 فندق الحيوانات الفاخر</p>
+    </footer>
+
+    <script>
+        // ===== بيانات التقييمات =====
+        let reviews = [
+            {
+                name: "أحمد محمد",
+                rating: 5,
+                text: "خدمة رائعة وتعامل ممتاز. الفندق نظيف والفريق محترف جداً.",
+                date: "2024-01-15"
+            },
+            {
+                name: "سارة العنزي",
+                rating: 5,
+                text: "كلبي ماكس استمتع كثيراً. أنصح الجميع بتجربة الفندق.",
+                date: "2024-01-10"
+            },
+            {
+                name: "فهد الدوسري",
+                rating: 4,
+                text: "خدمة جيدة والأسعار مناسبة. فقط أتمنى تنويع الأكل.",
+                date: "2024-01-05"
+            }
+        ];
+
+        // ===== دالة عرض التقييمات =====
+        function displayReviews() {
+            const container = document.getElementById('reviews-container');
+            if (!container) return;
+            
+            let html = '';
+            
+            // ترتيب التقييمات من الأحدث للأقدم
+            const sortedReviews = [...reviews].reverse();
+            
+            for (let review of sortedReviews) {
+                // تحويل التاريخ
+                const date = new Date(review.date);
+                const formattedDate = date.toLocaleDateString('ar-SA');
+                
+                // إنشاء النجوم
+                let stars = '';
+                for (let i = 0; i < 5; i++) {
+                    if (i < review.rating) {
+                        stars += '<i class="fas fa-star"></i>';
+                    } else {
+                        stars += '<i class="far fa-star"></i>';
+                    }
+                }
+                
+                // الحرف الأول من الاسم للصورة الرمزية
+                const firstLetter = review.name.charAt(0);
+                
+                html += `
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-info">
+                                <div class="reviewer-avatar">${firstLetter}</div>
+                                <div>
+                                    <div class="reviewer-name">${review.name}</div>
+                                    <div class="review-date">${formattedDate}</div>
+                                </div>
+                            </div>
+                            <div class="review-stars">${stars}</div>
+                        </div>
+                        <div class="review-text">${review.text}</div>
+                    </div>
+                `;
+            }
+            
+            container.innerHTML = html;
+            
+            // تحديث الإحصائيات
+            updateStats();
+        }
+
+        // ===== دالة تحديث الإحصائيات =====
+        function updateStats() {
+            const total = reviews.length;
+            let sum = 0;
+            let fiveStarCount = 0;
+            
+            for (let review of reviews) {
+                sum += review.rating;
+                if (review.rating === 5) fiveStarCount++;
+            }
+            
+            const average = total > 0 ? (sum / total).toFixed(1) : 0;
+            
+            // تحديث الأرقام
+            document.getElementById('total-reviews').textContent = total;
+            document.getElementById('average-rating').textContent = average;
+            document.getElementById('five-star').textContent = fiveStarCount;
+            
+            // تحديث النجوم المتوسطة
+            const avgStars = document.getElementById('average-stars');
+            if (avgStars) {
+                let starsHtml = '';
+                const avgValue = Math.round(average);
+                for (let i = 0; i < 5; i++) {
+                    starsHtml += i < avgValue ? '★' : '☆';
+                }
+                avgStars.textContent = starsHtml;
+            }
+        }
+
+        // ===== دالة إضافة تقييم جديد =====
+        function addReview() {
+            // جلب القيم
+            const name = document.getElementById('reviewer-name').value.trim();
+            const text = document.getElementById('review-text').value.trim();
+            
+            // جلب التقييم بالنجوم
+            let rating = 0;
+            const ratingInputs = document.getElementsByName('rating');
+            for (let input of ratingInputs) {
+                if (input.checked) {
+                    rating = parseInt(input.value);
+                    break;
+                }
+            }
+            
+            // التحقق من المدخلات
+            if (!name) {
+                showNotification('الرجاء إدخال الاسم', 'error');
+                return;
+            }
+            
+            if (!text) {
+                showNotification('الرجاء كتابة التقييم', 'error');
+                return;
+            }
+            
+            if (rating === 0) {
+                showNotification('الرجاء اختيار عدد النجوم', 'error');
+                return;
+            }
+            
+            // تاريخ اليوم
+            const today = new Date().toISOString().split('T')[0];
+            
+            // إضافة التقييم الجديد
+            reviews.push({
+                name: name,
+                rating: rating,
+                text: text,
+                date: today
+            });
+            
+            // إعادة عرض التقييمات
+            displayReviews();
+            
+            // تفريغ الحقول
+            document.getElementById('reviewer-name').value = '';
+            document.getElementById('review-text').value = '';
+            
+            // إلغاء اختيار النجوم
+            for (let input of ratingInputs) {
+                input.checked = false;
+            }
+            document.getElementById('selected-rating').textContent = 'اختر عدد النجوم';
+            
+            // إظهار إشعار النجاح
+            showNotification('تم إضافة تقييمك بنجاح شكراً لك!', 'success');
+        }
+
+        // ===== دالة إظهار الإشعارات =====
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            const messageSpan = document.getElementById('notification-message');
+            
+            messageSpan.textContent = message;
+            notification.style.background = type === 'error' ? '#dc3545' : 'var(--navy)';
+            notification.style.display = 'block';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        // ===== تحديث نص النجوم المختارة =====
+        const ratingInputs = document.getElementsByName('rating');
+        for (let input of ratingInputs) {
+            input.addEventListener('change', function() {
+                const stars = {
+                    1: '⭐ نجمة واحدة',
+                    2: '⭐⭐ نجمتان',
+                    3: '⭐⭐⭐ ثلاث نجوم',
+                    4: '⭐⭐⭐⭐ أربع نجوم',
+                    5: '⭐⭐⭐⭐⭐ خمس نجوم'
+                };
+                document.getElementById('selected-rating').textContent = stars[this.value];
+            });
+        }
+
+        // ===== عرض التقييمات عند تحميل الصفحة =====
+        window.onload = function() {
+            displayReviews();
+        };
+    </script>
+</body>
+</html>

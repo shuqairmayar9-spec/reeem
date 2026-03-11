@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>العروض والباقات - فندق الحيوانات الفاخر</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f5efe6 0%, #e8d9c5 100%);
+            min-height: 100vh;
+            color: #1a2b3c;
+        }
+
+        :root {
+            --honey: #D4A373;
+            --honey-light: #E9C9A9;
+            --honey-dark: #B97D4A;
+            --navy: #1A2B3C;
+            --navy-light: #2C3E50;
+            --navy-dark: #0F1A24;
+            --cream: #FAF3E8;
+            --white: #FFFFFF;
+            --gray: #666;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--honey);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--honey), var(--honey-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: var(--navy);
+            border: 3px solid var(--cream);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-icon:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .logo-text {
+            color: var(--honey-light);
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            color: var(--honey);
+            font-size: 18px;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background-color: var(--honey);
+            color: var(--navy-dark);
+            transform: translateY(-2px);
+        }
+
+        .page-header {
+            background: linear-gradient(rgba(26, 43, 60, 0.9), rgba(26, 43, 60, 0.9));
+            padding: 60px 5%;
+            text-align: center;
+            color: var(--cream);
+            border-bottom: 5px solid var(--honey);
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+        }
+
+        .page-header h1 span {
+            color: var(--honey);
+        }
+
+        .page-header p {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        .offers-section {
+            padding: 80px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 42px;
+            color: var(--navy);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--honey);
+        }
+
+        /* عروض مميزة */
+        .featured-offer {
+            background: linear-gradient(135deg, var(--honey), var(--honey-dark));
+            border-radius: 50px;
+            padding: 60px;
+            margin-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+            border: 5px solid var(--navy);
+        }
+
+        .featured-offer::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: var(--cream);
+            opacity: 0.1;
+            border-radius: 50%;
+        }
+
+        .featured-offer::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: var(--navy);
+            opacity: 0.1;
+            border-radius: 50%;
+        }
+
+        .offer-content {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .offer-text h3 {
+            font-size: 36px;
+            color: var(--navy);
+            margin-bottom: 15px;
+        }
+
+        .offer-text .offer-tag {
+            display: inline-block;
+            background: var(--navy);
+            color: var(--honey);
+            padding: 8px 25px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .offer-text p {
+            font-size: 18px;
+            color: var(--navy);
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .offer-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .offer-features li {
+            margin: 10px 0;
+            color: var(--navy);
+            font-size: 16px;
+        }
+
+        .offer-features i {
+            color: var(--cream);
+            margin-left: 10px;
+            background: var(--navy);
+            padding: 5px;
+            border-radius: 50%;
+            font-size: 12px;
+        }
+
+        .offer-price {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 20px;
+        }
+
+        .offer-price small {
+            font-size: 18px;
+            color: var(--cream);
+        }
+
+        .offer-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--navy);
+            color: var(--cream);
+            text-decoration: none;
+            border-radius: 40px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--navy);
+        }
+
+        .offer-btn:hover {
+            background: transparent;
+            color: var(--navy);
+        }
+
+        .offer-image {
+            text-align: center;
+        }
+
+        .offer-image i {
+            font-size: 200px;
+            color: var(--navy);
+            filter: drop-shadow(10px 10px 20px rgba(0,0,0,0.2));
+        }
+
+        /* باقات العروض */
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .offer-card {
+            background: var(--white);
+            border-radius: 30px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offer-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--honey);
+            box-shadow: 0 20px 40px rgba(212, 163, 115, 0.3);
+        }
+
+        .offer-card.popular {
+            border-color: var(--honey);
+            transform: scale(1.05);
+        }
+
+        .popular-tag {
+            position: absolute;
+            top: 20px;
+            left: -30px;
+            background: var(--honey);
+            color: var(--navy);
+            padding: 8px 40px;
+            transform: rotate(-45deg);
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .card-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--honey-light), var(--honey));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 40px;
+            color: var(--navy);
+            border: 4px solid var(--navy);
+            transition: all 0.3s ease;
+        }
+
+        .offer-card:hover .card-icon {
+            transform: rotate(360deg);
+            background: var(--navy);
+            color: var(--honey);
+            border-color: var(--honey);
+        }
+
+        .offer-card h3 {
+            font-size: 26px;
+            color: var(--navy);
+            margin-bottom: 15px;
+        }
+
+        .offer-card .price {
+            font-size: 42px;
+            color: var(--honey-dark);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .offer-card .price small {
+            font-size: 16px;
+            color: var(--gray);
+        }
+
+        .card-features {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: right;
+        }
+
+        .card-features li {
+            margin: 10px 0;
+            color: var(--gray);
+        }
+
+        .card-features i {
+            color: var(--honey);
+            margin-left: 10px;
+        }
+
+        .card-btn {
+            display: inline-block;
+            padding: 12px 35px;
+            background: var(--navy);
+            color: var(--cream);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .card-btn:hover {
+            background: var(--honey);
+            color: var(--navy);
+        }
+
+        /* عروض موسمية */
+        .seasonal-offers {
+            margin-bottom: 80px;
+        }
+
+        .seasonal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .seasonal-item {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .seasonal-item:hover {
+            border-color: var(--honey);
+            transform: translateY(-5px);
+        }
+
+        .seasonal-item i {
+            font-size: 50px;
+            color: var(--honey);
+            margin-bottom: 15px;
+        }
+
+        .seasonal-item h4 {
+            font-size: 22px;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+
+        .seasonal-item p {
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .seasonal-item .discount {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--honey-dark);
+        }
+
+        /* برنامج الولاء */
+        .loyalty-section {
+            background: linear-gradient(135deg, var(--navy), var(--navy-dark));
+            border-radius: 50px;
+            padding: 60px;
+            color: var(--cream);
+            margin-bottom: 60px;
+            border: 3px solid var(--honey);
+        }
+
+        .loyalty-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .loyalty-text h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .loyalty-text h2 span {
+            color: var(--honey);
+        }
+
+        .loyalty-text p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .loyalty-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .loyalty-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .loyalty-feature i {
+            color: var(--honey);
+            font-size: 24px;
+        }
+
+        .loyalty-image {
+            text-align: center;
+        }
+
+        .loyalty-image i {
+            font-size: 200px;
+            color: var(--honey);
+        }
+
+        .back-home {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .back-home a {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--navy);
+            color: var(--cream);
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .back-home a:hover {
+            background: var(--honey);
+            color: var(--navy);
+        }
+
+        .footer {
+            background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+            color: var(--cream);
+            padding: 40px 5%;
+            text-align: center;
+            border-top: 5px solid var(--honey);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                justify-content: center;
+            }
+            
+            .nav-links {
+                justify-content: center;
+            }
+
+            .offer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .loyalty-content {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-offer {
+                padding: 30px;
+            }
+
+            .offer-image i {
+                font-size: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل الكامل مع جميع الروابط - تم التعديل ✅ -->
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-paw"></i>
+            </div>
+            <div class="logo-text">
+                فندق الحيوانات
+                <span>Luxury Pet Hotel</span>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="services.html">الخدمات</a>
+            <a href="booking.html">الحجوزات</a>
+            <a href="gallery.html">معرض الكلاب</a>
+            <a href="about.html">من نحن</a>
+            <a href="faq.html">الأسئلة</a>
+            <a href="offers.html" class="active">العروض</a>
+            <a href="contact.html">اتصل بنا</a>
+        </div>
+    </nav>
+
+    <!-- رأس الصفحة -->
+    <div class="page-header">
+        <h1>العروض <span>والباقات</span></h1>
+        <p>عروض حصرية وباقات مميزة لراحة حيواناتكم الأليفة</p>
+    </div>
+
+    <!-- قسم العروض -->
+    <section class="offers-section">
+        <!-- عرض مميز -->
+        <div class="featured-offer">
+            <div class="offer-content">
+                <div class="offer-text">
+                    <span class="offer-tag">عرض الشهر</span>
+                    <h3>عطلة نهاية الأسبوع</h3>
+                    <p>استمتع بإقامة فاخرة لحيوانك الأليف مع باقة العطلة الأسبوعية</p>
+                    <ul class="offer-features">
+                        <li><i class="fas fa-check"></i> 3 ليال إقامة في جناح فاخر</li>
+                        <li><i class="fas fa-check"></i> جلسة سبا وتدليك مجانية</li>
+                        <li><i class="fas fa-check"></i> 3 وجبات يومية</li>
+                        <li><i class="fas fa-check"></i> جلسة تصوير احترافية</li>
+                    </ul>
+                    <div class="offer-price">
+                        899 <small>ريال</small>
+                    </div>
+                    <a href="booking.html" class="offer-btn">احجز الآن</a>
+                </div>
+                <div class="offer-image">
+                    <i class="fas fa-crown"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- باقات العروض -->
+        <div class="section-title">
+            <h2>الباقات المميزة</h2>
+        </div>
+
+        <div class="offers-grid">
+            <div class="offer-card">
+                <div class="card-icon">
+                    <i class="fas fa-dog"></i>
+                </div>
+                <h3>باقة التوفير</h3>
+                <div class="price">499 <small>ريال</small></div>
+                <ul class="card-features">
+                    <li><i class="fas fa-check"></i> 7 ليال إقامة</li>
+                    <li><i class="fas fa-check"></i> وجبات يومية</li>
+                    <li><i class="fas fa-check"></i> رعاية صحية أساسية</li>
+                    <li><i class="fas fa-check"></i> توفير 20%</li>
+                </ul>
+                <a href="booking.html" class="card-btn">احجز الباقة</a>
+            </div>
+
+            <div class="offer-card popular">
+                <div class="popular-tag">الأكثر مبيعاً</div>
+                <div class="card-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <h3>الباقة الذهبية</h3>
+                <div class="price">1299 <small>ريال</small></div>
+                <ul class="card-features">
+                    <li><i class="fas fa-check"></i> 14 ليلة إقامة</li>
+                    <li><i class="fas fa-check"></i> جميع الوجبات الفاخرة</li>
+                    <li><i class="fas fa-check"></i> 4 جلسات سبا</li>
+                    <li><i class="fas fa-check"></i> رعاية صحية متكاملة</li>
+                    <li><i class="fas fa-check"></i> توفير 30%</li>
+                </ul>
+                <a href="booking.html" class="card-btn">احجز الباقة</a>
+            </div>
+
+            <div class="offer-card">
+                <div class="card-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h3>الباقة العائلية</h3>
+                <div class="price">1799 <small>ريال</small></div>
+                <ul class="card-features">
+                    <li><i class="fas fa-check"></i> 21 ليلة إقامة</li>
+                    <li><i class="fas fa-check"></i> لحيوانين أليفين</li>
+                    <li><i class="fas fa-check"></i> جميع الخدمات</li>
+                    <li><i class="fas fa-check"></i> توفير 40%</li>
+                </ul>
+                <a href="booking.html" class="card-btn">احجز الباقة</a>
+            </div>
+        </div>
+
+        <!-- عروض موسمية -->
+        <div class="seasonal-offers">
+            <div class="section-title">
+                <h2>عروض موسمية</h2>
+            </div>
+
+            <div class="seasonal-grid">
+                <div class="seasonal-item">
+                    <i class="fas fa-snowflake"></i>
+                    <h4>عرض الشتاء</h4>
+                    <p>إقامة أسبوعية مع جلسات تدفئة مجانية</p>
+                    <div class="discount">خصم 25%</div>
+                </div>
+
+                <div class="seasonal-item">
+                    <i class="fas fa-sun"></i>
+                    <h4>عرض الصيف</h4>
+                    <p>باقة التبريد والعناية بالفراء</p>
+                    <div class="discount">خصم 20%</div>
+                </div>
+
+                <div class="seasonal-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h4>عرض العيد</h4>
+                    <p>باقة خاصة بالعيد مع هدايا لحيوانك</p>
+                    <div class="discount">خصم 30%</div>
+                </div>
+
+                <div class="seasonal-item">
+                    <i class="fas fa-gift"></i>
+                    <h4>عرض المواليد</h4>
+                    <p>باقة خاصة للجراء والقطط الصغيرة</p>
+                    <div class="discount">خصم 35%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- برنامج الولاء -->
+        <div class="loyalty-section">
+            <div class="loyalty-content">
+                <div class="loyalty-text">
+                    <h2>برنامج <span>الولاء</span></h2>
+                    <p>انضم إلى برنامج الولاء الخاص بنا واستمتع بمزايا حصرية</p>
+                    <div class="loyalty-features">
+                        <div class="loyalty-feature">
+                            <i class="fas fa-star"></i>
+                            <span>نقاط مضاعفة</span>
+                        </div>
+                        <div class="loyalty-feature">
+                            <i class="fas fa-gift"></i>
+                            <span>هدايا شهرية</span>
+                        </div>
+                        <div class="loyalty-feature">
+                            <i class="fas fa-percent"></i>
+                            <span>خصومات خاصة</span>
+                        </div>
+                        <div class="loyalty-feature">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>حجوزات أولوية</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="loyalty-image">
+                    <i class="fas fa-medal"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- رابط العودة للرئيسية -->
+    <div class="back-home">
+        <a href="index.html"><i class="fas fa-arrow-right"></i> العودة للرئيسية</a>
+    </div>
+
+    <!-- تذييل الصفحة -->
+    <footer class="footer">
+        <p>جميع الحقوق محفوظة &copy; 2024 فندق الحيوانات الفاخر - عروض حصرية</p>
+    </footer>
+</body>
+</html>

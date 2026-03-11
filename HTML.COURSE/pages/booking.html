@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الحجوزات - فندق الحيوانات الفاخر</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f5efe6 0%, #e8d9c5 100%);
+            min-height: 100vh;
+            color: #1a2b3c;
+        }
+
+        :root {
+            --honey: #D4A373;
+            --honey-light: #E9C9A9;
+            --honey-dark: #B97D4A;
+            --navy: #1A2B3C;
+            --navy-dark: #0F1A24;
+            --cream: #FAF3E8;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--honey);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--honey), var(--honey-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: var(--navy);
+            border: 3px solid var(--cream);
+        }
+
+        .logo-text {
+            color: var(--honey-light);
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            color: var(--honey);
+            font-size: 18px;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background-color: var(--honey);
+            color: var(--navy-dark);
+        }
+
+        .page-header {
+            background: linear-gradient(rgba(26, 43, 60, 0.9), rgba(26, 43, 60, 0.9));
+            padding: 60px 5%;
+            text-align: center;
+            color: var(--cream);
+            border-bottom: 5px solid var(--honey);
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+        }
+
+        .page-header h1 span {
+            color: var(--honey);
+        }
+
+        .booking-section {
+            padding: 80px 5%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .booking-form {
+            background: white;
+            border-radius: 40px;
+            padding: 50px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 3px solid var(--honey);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--honey);
+            font-size: 18px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 15px 45px 15px 15px;
+            border: 2px solid #ddd;
+            border-radius: 15px;
+            font-size: 16px;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .booking-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--navy), var(--navy-dark));
+            color: var(--honey);
+            padding: 18px;
+            border: none;
+            border-radius: 40px;
+            font-size: 24px;
+            font-weight: 700;
+            cursor: pointer;
+            border: 3px solid var(--honey);
+        }
+
+        .back-home {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .back-home a {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--navy);
+            color: var(--cream);
+            text-decoration: none;
+            border-radius: 30px;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+            color: var(--cream);
+            padding: 40px 5%;
+            text-align: center;
+            border-top: 5px solid var(--honey);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-paw"></i>
+            </div>
+            <div class="logo-text">
+                فندق الحيوانات
+                <span>Luxury Pet Hotel</span>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="services.html">الخدمات</a>
+            <a href="booking.html" class="active">الحجوزات</a>
+            <a href="gallery.html">معرض الكلاب</a>
+            <a href="about.html">من نحن</a>
+            <a href="faq.html">الأسئلة</a>
+            <a href="offers.html">العروض</a>
+            <a href="contact.html">اتصل بنا</a>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>احجز <span>الآن</span></h1>
+    </div>
+
+    <section class="booking-section">
+        <form class="booking-form">
+            <div class="form-group">
+                <i class="fas fa-user"></i>
+                <input type="text" placeholder="اسمك الكريم">
+            </div>
+            <div class="form-group">
+                <i class="fas fa-phone"></i>
+                <input type="tel" placeholder="رقم الهاتف">
+            </div>
+            <div class="form-group">
+                <i class="fas fa-paw"></i>
+                <select>
+                    <option>نوع الحيوان</option>
+                    <option>كلب</option>
+                    <option>قطة</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <i class="fas fa-calendar"></i>
+                <input type="date">
+            </div>
+            <button class="booking-btn">تأكيد الحجز</button>
+        </form>
+    </section>
+
+    <div class="back-home">
+        <a href="index.html">العودة للرئيسية</a>
+    </div>
+
+    <footer class="footer">
+        <p>جميع الحقوق محفوظة &copy; 2024 فندق الحيوانات الفاخر</p>
+    </footer>
+</body>
+</html>

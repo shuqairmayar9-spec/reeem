@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض الكلاب - فندق الحيوانات الفاخر</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f5efe6 0%, #e8d9c5 100%);
+            min-height: 100vh;
+            color: #1a2b3c;
+        }
+
+        :root {
+            --honey: #D4A373;
+            --honey-light: #E9C9A9;
+            --honey-dark: #B97D4A;
+            --navy: #1A2B3C;
+            --navy-light: #2C3E50;
+            --navy-dark: #0F1A24;
+            --cream: #FAF3E8;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--honey);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--honey), var(--honey-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: var(--navy);
+            border: 3px solid var(--cream);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-icon:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .logo-text {
+            color: var(--honey-light);
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            color: var(--honey);
+            font-size: 18px;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background-color: var(--honey);
+            color: var(--navy-dark);
+            transform: translateY(-2px);
+        }
+
+        .page-header {
+            background: linear-gradient(rgba(26, 43, 60, 0.9), rgba(26, 43, 60, 0.9));
+            padding: 60px 5%;
+            text-align: center;
+            color: var(--cream);
+            border-bottom: 5px solid var(--honey);
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+        }
+
+        .page-header h1 span {
+            color: var(--honey);
+        }
+
+        .page-header p {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        .gallery-section {
+            padding: 80px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 25px;
+            border: 2px solid var(--honey);
+            background: transparent;
+            color: var(--navy);
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--honey);
+            color: var(--navy);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 30px;
+            overflow: hidden;
+            cursor: pointer;
+            height: 300px;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item:hover {
+            border-color: var(--honey);
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(212, 163, 115, 0.3);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: all 0.5s ease;
+        }
+
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, var(--navy), transparent);
+            padding: 25px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h3 {
+            color: var(--honey);
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .gallery-overlay p {
+            color: var(--cream);
+            font-size: 15px;
+        }
+
+        .back-home {
+            text-align: center;
+            margin: 50px 0;
+        }
+
+        .back-home a {
+            display: inline-block;
+            padding: 12px 35px;
+            background: var(--navy);
+            color: var(--cream);
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--navy);
+        }
+
+        .back-home a:hover {
+            background: var(--honey);
+            color: var(--navy);
+            border-color: var(--honey);
+        }
+
+        .footer {
+            background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+            color: var(--cream);
+            padding: 40px 5%;
+            text-align: center;
+            border-top: 5px solid var(--honey);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                justify-content: center;
+            }
+            
+            .nav-links {
+                justify-content: center;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-item {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل الكامل مع جميع الروابط -->
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-paw"></i>
+            </div>
+            <div class="logo-text">
+                فندق الحيوانات
+                <span>Luxury Pet Hotel</span>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="services.html">الخدمات</a>
+            <a href="booking.html">الحجوزات</a>
+            <a href="gallery.html" class="active">معرض الكلاب</a>
+            <a href="about.html">من نحن</a>
+            <a href="faq.html">الأسئلة</a>
+            <a href="contact.html">اتصل بنا</a>
+            <a href="offers.html" class="active">العروض</a>
+        </div>
+    </nav>
+
+    <!-- رأس الصفحة -->
+    <div class="page-header">
+        <h1>معرض <span>الكلاب</span></h1>
+        <p>صور كلابنا الضيوف في أجمل لحظاتهم بالفندق</p>
+    </div>
+
+    <!-- قسم المعرض -->
+    <section class="gallery-section">
+        <div class="filter-buttons">
+            <button class="filter-btn active">الكل</button>
+            <button class="filter-btn">كلاب صغيرة</button>
+            <button class="filter-btn">كلاب كبيرة</button>
+            <button class="filter-btn">لابرادور</button>
+            <button class="filter-btn">هاسكي</button>
+            <button class="filter-btn">جيرمن</button>
+        </div>
+
+        <div class="gallery-grid">
+            <!-- كلب 1 - جيرمن شيبرد -->
+            <div class="gallery-item">
+                <div class="gallery-image" style="background-image: url('https://images.unsplash.com/photo-1568572933382-74d440642117?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="gallery-overlay">
+                    <h3>ماكس</h3>
+                    <p>جيرمن شيبرد - 3 سنوات</p>
+                </div>
+            </div>
+
+            <!-- كلب 2 - لابرادور -->
+            <div class="gallery-item">
+                <div class="gallery-image" style="background-image: url('https://images.unsplash.com/photo-1591769225440-811ad7d6eab3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="gallery-overlay">
+                    <h3>بودي</h3>
+                    <p>لابرادور - سنتين</p>
+                </div>
+            </div>
+
+            <!-- كلب 3 - هاسكي -->
+            <div class="gallery-item">
+                <div class="gallery-image" style="background-image: url('https://images.unsplash.com/photo-1617895153857-82fe79adfcd4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="gallery-overlay">
+                    <h3>روكي</h3>
+                    <p>هاسكي - 4 سنوات</p>
+                </div>
+            </div>
+
+            <!-- كلب 4 - جولدن ريتريفر -->
+            <div class="gallery-item">
+                <div class="gallery-image" style="background-image: url('https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="gallery-overlay">
+                    <h3>جولدي</h3>
+                    <p>جولدن ريتريفر - سنتين</p>
+                </div>
+            </div>
+
+            <!-- كلب 5 - روت وايلر -->
+            <div class="gallery-item">
+                <div class="gallery-image" style="background-image: url('https://images.unsplash.com/photo-1567759455318-9a5df439a3e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="gallery-overlay">
+                    <h3>برونو</h3>
+                    <p>روت وايلر - 5 سنوات</p>
+                </div>
+            </div>
+
+            <!-- كلب 6 - شيواوا -->
+            <div class="gallery-item">
+                <div class="gallery-image" style="background-image: url('https://images.unsplash.com/photo-1591946614720-90a587da4a36?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="gallery-overlay">
+                    <h3>تشوي</h3>
+                    <p>شيواوا - سنة</p>
+                </div>
+            </div>
+
+            <!-- كلب 7 - بيتبول -->
+            <div class="gallery-item">
+                <div class="gallery-image" style="background-image: url('https://images.unsplash.com/photo-1600804340584-c7db2eacf0bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="gallery-overlay">
+                    <h3>تايجر</h3>
+                    <p>بيتبول - سنتين</p>
+                </div>
+            </div>
+
+            <!-- كلب 8 - بولدوغ -->
+            <div class="gallery-item">
+                <div class="gallery-image" style="background-image: url('https://images.unsplash.com/photo-1583511655826-05700d52f4d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="gallery-overlay">
+                    <h3>وينستون</h3>
+                    <p>بولدوغ - 3 سنوات</p>
+                </div>
+            </div>
+
+            <!-- كلب 9 - كلب عربي -->
+            <div class="gallery-item">
+                <div class="gallery-image" style="background-image: url('https://images.unsplash.com/photo-1518717758536-85ae29035b6d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="gallery-overlay">
+                    <h3>سلطان</h3>
+                    <p>كلب عربي - 4 سنوات</p>
+                </div>
+            </div>
+
+            <!-- كلب 10 - يوركشاير -->
+            <div class="gallery-item">
+                <div class="gallery-image" style="background-image: url('https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="gallery-overlay">
+                    <h3>لوسي</h3>
+                    <p>يوركشاير - 8 شهور</p>
+                </div>
+            </div>
+
+            <!-- كلب 11 - لابرادور أسود -->
+            <div class="gallery-item">
+                <div class="gallery-image" style="background-image: url('https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="gallery-overlay">
+                    <h3>تشارلي</h3>
+                    <p>لابرادور أسود - سنتين</p>
+                </div>
+            </div>
+
+            <!-- كلب 12 - هاسكي آخر -->
+            <div class="gallery-item">
+                <div class="gallery-image" style="background-image: url('https://images.unsplash.com/photo-1605565346590-2c80b60f60e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="gallery-overlay">
+                    <h3>جاك</h3>
+                    <p>هاسكي - 3 سنوات</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- رابط العودة للرئيسية -->
+    <div class="back-home">
+        <a href="index.html"><i class="fas fa-arrow-right"></i> العودة للرئيسية</a>
+    </div>
+
+    <!-- تذييل الصفحة -->
+    <footer class="footer">
+        <p>جميع الحقوق محفوظة &copy; 2024 فندق الحيوانات الفاخر - معرض الكلاب</p>
+    </footer>
+</body>
+</html>
+<!-- أزرار تكبير وتصغير الصور -->
+<div class="zoom-controls" style="position: fixed; bottom: 100px; left: 20px; z-index: 9999; display: flex; gap: 10px;">
+    <button onclick="zoomOut()" style="background: var(--navy); color: var(--cream); border: 2px solid var(--honey); width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 24px; font-weight: bold; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.3s ease;">
+        <i class="fas fa-search-minus"></i>
+    </button>
+    <button onclick="resetZoom()" style="background: var(--navy); color: var(--cream); border: 2px solid var(--honey); width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.3s ease;">
+        <i class="fas fa-undo"></i>
+    </button>
+    <button onclick="zoomIn()" style="background: var(--navy); color: var(--cream); border: 2px solid var(--honey); width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 24px; font-weight: bold; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.3s ease;">
+        <i class="fas fa-search-plus"></i>
+    </button>
+</div>
+
+<!-- نافذة عرض الصور المكبرة -->
+<div id="imageModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000; justify-content: center; align-items: center; flex-direction: column;">
+    <button onclick="closeModal()" style="position: absolute; top: 20px; right: 20px; background: var(--honey); color: var(--navy); border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 24px; font-weight: bold; border: 2px solid var(--cream);">
+        <i class="fas fa-times"></i>
+    </button>
+    <div style="display: flex; gap: 20px; align-items: center;">
+        <button onclick="changeImage(-1)" style="background: var(--navy); color: var(--cream); border: 2px solid var(--honey); width: 60px; height: 60px; border-radius: 50%; cursor: pointer; font-size: 28px;">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <img id="modalImage" src="" style="max-width: 80vw; max-height: 70vh; border: 5px solid var(--honey); border-radius: 20px; box-shadow: 0 0 30px rgba(212,163,115,0.5);">
+        <button onclick="changeImage(1)" style="background: var(--navy); color: var(--cream); border: 2px solid var(--honey); width: 60px; height: 60px; border-radius: 50%; cursor: pointer; font-size: 28px;">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+    </div>
+    <div style="margin-top: 20px; color: white; font-size: 18px;" id="imageCounter"></div>
+</div>
+
+<script>
+    // ==================== نظام تكبير وتصغير الصور ====================
+    
+    // متغيرات التكبير
+    let zoomLevel = 1;
+    const zoomStep = 0.2;
+    const maxZoom = 3;
+    const minZoom = 0.5;
+    
+    // مصفوفة الصور في الموقع
+    let allImages = [];
+    let currentImageIndex = 0;
+    
+    // دالة تجميع كل الصور في الموقع
+    function collectImages() {
+        allImages = [];
+        
+        // صور الخلفية في بطاقات الغرف
+        document.querySelectorAll('.room-image').forEach((el, index) => {
+            const bgImage = window.getComputedStyle(el).backgroundImage;
+            if (bgImage && bgImage !== 'none') {
+                allImages.push({
+                    element: el,
+                    type: 'background',
+                    url: bgImage.slice(5, -2),
+                    index: index
+                });
+            }
+        });
+        
+        // صور أيقونات Font Awesome (نخزن الأيقونات)
+        document.querySelectorAll('.service-icon i, .room-image i, .floating-card i').forEach((el, index) => {
+            allImages.push({
+                element: el,
+                type: 'icon',
+                iconClass: el.className,
+                index: index
+            });
+        });
+        
+        // صور الخلفية الرئيسية
+        const hero = document.querySelector('.hero');
+        if (hero) {
+            const heroBg = window.getComputedStyle(hero).backgroundImage;
+            if (heroBg && heroBg !== 'none') {
+                allImages.push({
+                    element: hero,
+                    type: 'background',
+                    url: heroBg.slice(5, -2),
+                    index: 'hero'
+                });
+            }
+        }
+    }
+    
+    // دالة التكبير
+    function zoomIn() {
+        if (zoomLevel < maxZoom) {
+            zoomLevel += zoomStep;
+            applyZoom();
+            showZoomNotification(`تكبير: ${Math.round(zoomLevel * 100)}%`);
+        } else {
+            showZoomNotification('وصلت للحد الأقصى للتكبير');
+        }
+    }
+    
+    // دالة التصغير
+    function zoomOut() {
+        if (zoomLevel > minZoom) {
+            zoomLevel -= zoomStep;
+            applyZoom();
+            showZoomNotification(`تصغير: ${Math.round(zoomLevel * 100)}%`);
+        } else {
+            showZoomNotification('وصلت للحد الأدنى للتصغير');
+        }
+    }
+    
+    // دالة إعادة الحجم الطبيعي
+    function resetZoom() {
+        zoomLevel = 1;
+        applyZoom();
+        showZoomNotification('الحجم الطبيعي 100%');
+    }
+    
+    // دالة تطبيق التكبير على جميع الصور
+    function applyZoom() {
+        // تكبير/تصغير صور الخلفية
+        document.querySelectorAll('.room-image, .hero').forEach(el => {
+            el.style.backgroundSize = `${zoomLevel * 100}%`;
+            el.style.transition = 'background-size 0.3s ease';
+        });
+        
+        // تكبير/تصغير الأيقونات
+        document.querySelectorAll('.service-icon i, .room-image i, .floating-card i').forEach(el => {
+            el.style.fontSize = `${zoomLevel * 40}px`;
+            el.style.transition = 'font-size 0.3s ease';
+        });
+        
+        // تكبير/تصغير صور معرض الكلاب
+        document.querySelectorAll('.gallery-image').forEach(el => {
+            el.style.backgroundSize = `${zoomLevel * 100}%`;
+            el.style.transition = 'background-size 0.3s ease';
+        });
+    }
+    
+    // دالة عرض إشعار التكبير
+    function showZoomNotification(message) {
+        let notification = document.getElementById('zoomNotification');
+        
+        if (!notification) {
+            notification = document.createElement('div');
+            notification.id = 'zoomNotification';
+            notification.style.position = 'fixed';
+            notification.style.bottom = '180px';
+            notification.style.left = '20px';
+            notification.style.background = 'var(--navy)';
+            notification.style.color = 'var(--cream)';
+            notification.style.padding = '10px 20px';
+            notification.style.borderRadius = '30px';
+            notification.style.border = '2px solid var(--honey)';
+            notification.style.zIndex = '9999';
+            notification.style.fontWeight = '600';
+            notification.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
+            document.body.appendChild(notification);
+        }
+        
+        notification.textContent = message;
+        notification.style.display = 'block';
+        
+        setTimeout(() => {
+            notification.style.display = 'none';
+        }, 1500);
+    }
+    
+    // ==================== نظام عرض الصور المكبرة ====================
+    
+    // فتح الصورة في نافذة مكبرة
+    function openImageModal(element, index) {
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        
+        // تحديد مصدر الصورة
+        let imgSrc = '';
+        
+        if (element.tagName === 'I') {
+            // إذا كانت أيقونة، نستخدم أيقونة بديلة
+            imgSrc = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9IiNENEEzNzMiPjxwYXRoIGQ9Ik0xMiAybDIgN2g3bC01IDQgMiA3LTYtNC02IDQgMi03LTUtNGg3eiIvPjwvc3ZnPg==';
+        } else {
+            // إذا كانت صورة خلفية
+            const bgImage = window.getComputedStyle(element).backgroundImage;
+            if (bgImage && bgImage !== 'none') {
+                imgSrc = bgImage.slice(5, -2);
+            }
+        }
+        
+        if (imgSrc) {
+            modalImg.src = imgSrc;
+            currentImageIndex = index;
+            modal.style.display = 'flex';
+            updateImageCounter();
+        }
+    }
+    
+    // إغلاق النافذة المكبرة
+    function closeModal() {
+        document.getElementById('imageModal').style.display = 'none';
+    }
+    
+    // تغيير الصورة (التالي/السابق)
+    function changeImage(direction) {
+        collectImages();
+        
+        if (allImages.length === 0) return;
+        
+        currentImageIndex = (currentImageIndex + direction + allImages.length) % allImages.length;
+        
+        const img = allImages[currentImageIndex];
+        const modalImg = document.getElementById('modalImage');
+        
+        if (img.type === 'background' && img.url) {
+            modalImg.src = img.url;
+        } else {
+            // صورة افتراضية للأيقونات
+            modalImg.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9IiNENEEzNzMiPjxwYXRoIGQ9Ik0xMiAybDIgN2g3bC01IDQgMiA3LTYtNC02IDQgMi03LTUtNGg3eiIvPjwvc3ZnPg==';
+        }
+        
+        updateImageCounter();
+    }
+    
+    // تحديث عداد الصور
+    function updateImageCounter() {
+        const counter = document.getElementById('imageCounter');
+        if (counter) {
+            counter.textContent = `صورة ${currentImageIndex + 1} من ${allImages.length}`;
+        }
+    }
+    
+    // إضافة خاصية النقر على الصور لتكبيرها
+    function makeImagesClickable() {
+        // بطاقات الغرف
+        document.querySelectorAll('.room-image').forEach((el, index) => {
+            el.style.cursor = 'pointer';
+            el.addEventListener('click', (e) => {
+                e.stopPropagation();
+                collectImages();
+                openImageModal(el, index);
+            });
+        });
+        
+        // أيقونات الخدمات
+        document.querySelectorAll('.service-icon').forEach((el, index) => {
+            el.style.cursor = 'pointer';
+            el.addEventListener('click', (e) => {
+                e.stopPropagation();
+                collectImages();
+                openImageModal(el, index + 10);
+            });
+        });
+        
+        // صور معرض الكلاب
+        document.querySelectorAll('.gallery-item').forEach((el, index) => {
+            el.style.cursor = 'pointer';
+            el.addEventListener('click', () => {
+                collectImages();
+                openImageModal(el, index + 20);
+            });
+        });
+        
+        // البطاقات العائمة
+        document.querySelectorAll('.floating-card').forEach((el, index) => {
+            el.style.cursor = 'pointer';
+            el.addEventListener('click', (e) => {
+                e.stopPropagation();
+                collectImages();
+                openImageModal(el, index + 30);
+            });
+        });
+    }
+    
+    // إضافة اختصارات لوحة المفاتيح
+    document.addEventListener('keydown', (e) => {
+        const modal = document.getElementById('imageModal');
+        
+        if (modal.style.display === 'flex') {
+            if (e.key === 'ArrowRight') {
+                changeImage(-1);
+            } else if (e.key === 'ArrowLeft') {
+                changeImage(1);
+            } else if (e.key === 'Escape') {
+                closeModal();
+            }
+        } else {
+            if (e.ctrlKey && e.key === '+') {
+                e.preventDefault();
+                zoomIn();
+            } else if (e.ctrlKey && e.key === '-') {
+                e.preventDefault();
+                zoomOut();
+            } else if (e.ctrlKey && e.key === '0') {
+                e.preventDefault();
+                resetZoom();
+            }
+        }
+    });
+    
+    // تفعيل الخاصية عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', () => {
+        collectImages();
+        makeImagesClickable();
+    });
+</script>
+
+<!-- إضافة بعض الأنماط للتحسين -->
+<style>
+    /* تأثيرات hover للأزرار */
+    .zoom-controls button:hover {
+        transform: scale(1.1);
+        background: var(--honey) !important;
+        color: var(--navy) !important;
+    }
+    
+    /* تأثيرات للنافذة المنبثقة */
+    #imageModal {
+        animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    #modalImage {
+        animation: zoomIn 0.3s ease;
+    }
+    
+    @keyframes zoomIn {
+        from { transform: scale(0.8); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+    
+    /* مؤشر التكبير */
+    #zoomNotification {
+        animation: slideIn 0.3s ease;
+    }
+    
+    @keyframes slideIn {
+        from { transform: translateX(-100px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+</style>

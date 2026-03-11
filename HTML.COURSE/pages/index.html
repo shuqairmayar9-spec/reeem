@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فندق الحيوانات الفاخر - الرئيسية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f5efe6 0%, #e8d9c5 100%);
+            min-height: 100vh;
+            color: #1a2b3c;
+            line-height: 1.6;
+        }
+
+        :root {
+            --honey: #D4A373;
+            --honey-light: #E9C9A9;
+            --honey-dark: #B97D4A;
+            --navy: #1A2B3C;
+            --navy-light: #2C3E50;
+            --navy-dark: #0F1A24;
+            --cream: #FAF3E8;
+        }
+
+        /* شريط التنقل */
+        .navbar {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            border-bottom: 3px solid var(--honey);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--honey), var(--honey-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: var(--navy);
+            border: 3px solid var(--cream);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-icon:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .logo-text {
+            color: var(--honey-light);
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            color: var(--honey);
+            font-weight: 300;
+            font-size: 18px;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background-color: var(--honey);
+            color: var(--navy-dark);
+        }
+
+        /* القسم الرئيسي */
+        .hero {
+            background: linear-gradient(rgba(26, 43, 60, 0.8), rgba(26, 43, 60, 0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><rect width="100" height="100" fill="%231A2B3C"/><circle cx="30" cy="40" r="8" fill="%23D4A373"/><circle cx="70" cy="60" r="8" fill="%23D4A373"/><circle cx="50" cy="30" r="6" fill="%23E9C9A9"/></svg>');
+            padding: 80px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+            color: var(--cream);
+        }
+
+        .hero-content h1 {
+            font-size: 54px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 span {
+            color: var(--honey);
+            display: block;
+            font-size: 68px;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--honey), var(--honey-dark));
+            color: var(--navy);
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 700;
+            border: 2px solid var(--cream);
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 163, 115, 0.6);
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .floating-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--honey);
+            border-radius: 30px;
+            padding: 30px;
+            width: 200px;
+            text-align: center;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating-card i {
+            font-size: 60px;
+            color: var(--honey);
+            margin-bottom: 15px;
+        }
+
+        .floating-card h3 {
+            color: var(--cream);
+            font-size: 24px;
+        }
+
+        /* قسم الخدمات في الرئيسية */
+        .services-preview {
+            padding: 80px 5%;
+            background: linear-gradient(135deg, var(--cream), var(--honey-light));
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 48px;
+            color: var(--navy);
+        }
+
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .preview-card {
+            background: white;
+            border-radius: 30px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .preview-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(212, 163, 115, 0.3);
+        }
+
+        .preview-card i {
+            font-size: 50px;
+            color: var(--honey);
+            margin-bottom: 20px;
+        }
+
+        .preview-card h3 {
+            font-size: 24px;
+            color: var(--navy);
+            margin-bottom: 15px;
+        }
+
+        .more-link {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 12px 30px;
+            background: var(--navy);
+            color: var(--cream);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .more-link:hover {
+            background: var(--honey);
+            color: var(--navy);
+        }
+
+        .footer {
+            background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+            color: var(--cream);
+            padding: 40px 5%;
+            text-align: center;
+            border-top: 5px solid var(--honey);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-paw"></i>
+            </div>
+            <div class="logo-text">
+                فندق الحيوانات
+                <span>Luxury Pet Hotel</span>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="active">الرئيسية</a>
+            <a href="services.html">الخدمات</a>
+            <a href="booking.html">الحجوزات</a>
+            <a href="contact.html">اتصل بنا</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>
+                فندق فاخر
+                <span>لأصدقائنا الأحباء</span>
+            </h1>
+            <p>نقدم لحيواناتك الأليفة أفضل رعاية فندقية مع خدمات متميزة وبيئة آمنة ومريحة</p>
+            <a href="booking.html" class="cta-button">
+                <i class="fas fa-calendar-check"></i>
+                احجز الآن
+            </a>
+        </div>
+        <div class="hero-image">
+            <div class="floating-card">
+                <i class="fas fa-dog"></i>
+                <h3>كلاب</h3>
+            </div>
+            <div class="floating-card">
+                <i class="fas fa-cat"></i>
+                <h3>قطط</h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-preview">
+        <div class="section-title">
+            <h2>خدماتنا المميزة</h2>
+        </div>
+        <div class="preview-grid">
+            <div class="preview-card">
+                <i class="fas fa-utensils"></i>
+                <h3>تغذية خاصة</h3>
+                <p>وجبات محضرة بعناية</p>
+            </div>
+            <div class="preview-card">
+                <i class="fas fa-bath"></i>
+                <h3>سبا واستحمام</h3>
+                <p>عناية فائقة بفراء حيوانك</p>
+            </div>
+            <div class="preview-card">
+                <i class="fas fa-heart"></i>
+                <h3>رعاية صحية</h3>
+                <p>فريق طبي متكامل</p>
+            </div>
+        </div>
+        <div style="text-align: center;">
+            <a href="services.html" class="more-link">شاهد جميع خدماتنا</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>جميع الحقوق محفوظة &copy; 2024 فندق الحيوانات الفاخر</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اتصل بنا - فندق الحيوانات الفاخر</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f5efe6 0%, #e8d9c5 100%);
+            min-height: 100vh;
+            color: #1a2b3c;
+            line-height: 1.6;
+        }
+
+        :root {
+            --honey: #D4A373;
+            --honey-light: #E9C9A9;
+            --honey-dark: #B97D4A;
+            --navy: #1A2B3C;
+            --navy-light: #2C3E50;
+            --navy-dark: #0F1A24;
+            --cream: #FAF3E8;
+            --white: #FFFFFF;
+            --gray: #666;
+            --gray-light: #f5f5f5;
+        }
+
+        /* شريط التنقل */
+        .navbar {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            border-bottom: 3px solid var(--honey);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--honey), var(--honey-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: var(--navy);
+            border: 3px solid var(--cream);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-icon:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .logo-text {
+            color: var(--honey-light);
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            color: var(--honey);
+            font-weight: 300;
+            font-size: 18px;
+            display: block;
+            margin-top: -5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background-color: var(--honey);
+            color: var(--navy-dark);
+            transform: translateY(-2px);
+        }
+
+        /* مساحة للشريط الثابت */
+        .spacer {
+            height: 90px;
+        }
+
+        /* رأس الصفحة */
+        .page-header {
+            background: linear-gradient(rgba(26, 43, 60, 0.9), rgba(26, 43, 60, 0.9)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><rect width="100" height="100" fill="%231A2B3C"/><circle cx="30" cy="40" r="8" fill="%23D4A373"/><circle cx="70" cy="60" r="8" fill="%23D4A373"/></svg>');
+            background-size: 200px 200px;
+            color: var(--cream);
+            padding: 60px 5%;
+            text-align: center;
+            border-bottom: 5px solid var(--honey);
+        }
+
+        .page-header h1 {
+            font-size: 54px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .page-header h1 span {
+            color: var(--honey);
+        }
+
+        .page-header p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* قسم الاتصال الرئيسي */
+        .contact-main {
+            padding: 80px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* بطاقات التواصل */
+        .contact-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .contact-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 3px solid transparent;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--honey), var(--navy));
+            transition: height 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--honey);
+            box-shadow: 0 20px 40px rgba(212, 163, 115, 0.3);
+        }
+
+        .contact-card:hover::before {
+            height: 10px;
+        }
+
+        .card-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--honey-light), var(--honey));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 40px;
+            color: var(--navy);
+            border: 4px solid var(--navy);
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover .card-icon {
+            transform: rotateY(180deg) scale(1.1);
+            background: var(--navy);
+            color: var(--honey);
+            border-color: var(--honey);
+        }
+
+        .contact-card h3 {
+            font-size: 24px;
+            color: var(--navy);
+            margin-bottom: 15px;
+        }
+
+        .contact-card p {
+            color: var(--gray);
+            font-size: 18px;
+            margin-bottom: 5px;
+            direction: ltr;
+        }
+
+        .contact-card .small-text {
+            font-size: 14px;
+            color: var(--honey-dark);
+        }
+
+        /* الخريطة ونموذج الاتصال */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        /* الخريطة */
+        .map-container {
+            background: var(--white);
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 3px solid var(--honey);
+            height: 500px;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--navy), var(--navy-dark));
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cream);
+        }
+
+        .map-overlay {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .map-overlay i {
+            font-size: 80px;
+            color: var(--honey);
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .map-overlay h3 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .map-overlay p {
+            font-size: 20px;
+            color: var(--honey-light);
+            margin-bottom: 10px;
+        }
+
+        /* نموذج الاتصال */
+        .contact-form-container {
+            background: var(--white);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 3px solid var(--honey);
+        }
+
+        .form-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .form-title i {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--honey), var(--honey-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--navy);
+            border: 3px solid var(--navy);
+        }
+
+        .form-title h2 {
+            font-size: 28px;
+            color: var(--navy);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--honey);
+            font-size: 18px;
+            z-index: 1;
+        }
+
+        .form-group.textarea i {
+            top: 25px;
+            transform: none;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px 45px 15px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            font-size: 16px;
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.3s ease;
+            background: var(--gray-light);
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--honey);
+            box-shadow: 0 0 0 4px rgba(212, 163, 115, 0.2);
+            background: var(--white);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--navy), var(--navy-dark));
+            color: var(--honey);
+            padding: 18px;
+            border: none;
+            border-radius: 40px;
+            font-size: 22px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid var(--honey);
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            background: var(--honey);
+            color: var(--navy);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(212, 163, 115, 0.4);
+        }
+
+        .submit-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .submit-btn:hover i {
+            transform: translateX(-5px);
+        }
+
+        /* ساعات العمل */
+        .hours-section {
+            background: linear-gradient(135deg, var(--navy), var(--navy-dark));
+            border-radius: 50px;
+            padding: 50px;
+            color: var(--cream);
+            border: 3px solid var(--honey);
+            margin-bottom: 60px;
+        }
+
+        .hours-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hours-title i {
+            font-size: 50px;
+            color: var(--honey);
+            margin-bottom: 15px;
+        }
+
+        .hours-title h2 {
+            font-size: 36px;
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .hours-item {
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--honey);
+        }
+
+        .hours-item .day {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--honey);
+            margin-bottom: 10px;
+        }
+
+        .hours-item .time {
+            font-size: 20px;
+            color: var(--cream);
+        }
+
+        .hours-item .note {
+            font-size: 14px;
+            color: var(--honey-light);
+            margin-top: 5px;
+        }
+
+        /* الأسئلة الشائعة */
+        .faq-section {
+            background: var(--white);
+            border-radius: 50px;
+            padding: 50px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 3px solid var(--honey);
+        }
+
+        .faq-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .faq-title i {
+            font-size: 50px;
+            color: var(--honey);
+            margin-bottom: 15px;
+        }
+
+        .faq-title h2 {
+            font-size: 36px;
+            color: var(--navy);
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .faq-item {
+            background: var(--gray-light);
+            border-radius: 20px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .faq-item:hover {
+            border-color: var(--honey);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(212, 163, 115, 0.2);
+        }
+
+        .faq-question {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .faq-question i {
+            color: var(--honey);
+            font-size: 20px;
+        }
+
+        .faq-question h3 {
+            font-size: 18px;
+            color: var(--navy);
+        }
+
+        .faq-item p {
+            color: var(--gray);
+            margin-right: 30px;
+            font-size: 15px;
+        }
+
+        /* أزرار التواصل السريع */
+        .quick-contact {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .quick-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .quick-btn.whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .quick-btn.whatsapp:hover {
+            background: transparent;
+            border-color: #25D366;
+            color: #25D366;
+            transform: scale(1.05);
+        }
+
+        .quick-btn.phone {
+            background: var(--honey);
+            color: var(--navy);
+        }
+
+        .quick-btn.phone:hover {
+            background: transparent;
+            border-color: var(--honey);
+            color: var(--honey);
+            transform: scale(1.05);
+        }
+
+        .quick-btn.email {
+            background: var(--navy);
+            color: var(--honey);
+        }
+
+        .quick-btn.email:hover {
+            background: transparent;
+            border-color: var(--navy);
+            color: var(--navy);
+            transform: scale(1.05);
+        }
+
+        /* تذييل الصفحة */
+        .footer {
+            background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+            color: var(--cream);
+            padding: 40px 5% 20px;
+            border-top: 5px solid var(--honey);
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-logo i {
+            font-size: 40px;
+            color: var(--honey);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: var(--honey-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--honey);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: var(--honey);
+            color: var(--navy);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--cream);
+            color: var(--honey-dark);
+            transform: rotate(360deg) scale(1.1);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid var(--honey);
+            color: var(--honey-light);
+            font-size: 14px;
+        }
+
+        /* تصميم متجاوب */
+        @media (max-width: 968px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .map-container {
+                height: 400px;
+            }
+
+            .page-header h1 {
+                font-size: 42px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .contact-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .hours-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-contact {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .quick-btn {
+                justify-content: center;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل الكامل - تم التعديل ✅ -->
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-paw"></i>
+            </div>
+            <div class="logo-text">
+                فندق الحيوانات
+                <span>Luxury Pet Hotel</span>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="services.html">الخدمات</a>
+            <a href="booking.html">الحجوزات</a>
+            <a href="gallery.html">معرض الكلاب</a>
+            <a href="about.html">من نحن</a>
+            <a href="faq.html">الأسئلة</a>
+            <a href="offers.html">العروض</a>
+            <a href="contact.html" class="active">اتصل بنا</a>
+        </div>
+    </nav>
+
+    <!-- مساحة للشريط الثابت -->
+    <div class="spacer"></div>
+
+    <!-- رأس الصفحة -->
+    <div class="page-header">
+        <h1>تواصل <span>معنا</span></h1>
+        <p>نحن هنا للإجابة على جميع استفساراتك - فريقنا جاهز لخدمتك على مدار الساعة</p>
+    </div>
+
+    <!-- قسم الاتصال الرئيسي -->
+    <main class="contact-main">
+        <!-- بطاقات التواصل -->
+        <div class="contact-cards">
+            <div class="contact-card">
+                <div class="card-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h3>العنوان</h3>
+                <p>الرياض، حي النخيل</p>
+                <p>شارع الأمير سلطان</p>
+                <p class="small-text">مبنى رقم 1234</p>
+            </div>
+
+            <div class="contact-card">
+                <div class="card-icon">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <h3>رقم الهاتف</h3>
+                <p>+966 123 456 789</p>
+                <p>+966 987 654 321</p>
+                <p class="small-text">متاح 24/7</p>
+            </div>
+
+            <div class="contact-card">
+                <div class="card-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3>البريد الإلكتروني</h3>
+                <p>info@pethotel.com</p>
+                <p>booking@pethotel.com</p>
+                <p class="small-text">نرد خلال 24 ساعة</p>
+            </div>
+
+            <div class="contact-card">
+                <div class="card-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <h3>واتساب</h3>
+                <p>+966 123 456 789</p>
+                <p>+966 987 654 321</p>
+                <p class="small-text">رد فوري</p>
+            </div>
+        </div>
+
+        <!-- الخريطة ونموذج الاتصال -->
+        <div class="contact-grid">
+            <!-- الخريطة -->
+            <div class="map-container">
+                <div class="map-placeholder">
+                    <div class="map-overlay">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <h3>موقعنا على الخريطة</h3>
+                        <p>الرياض، حي النخيل</p>
+                        <p>شارع الأمير سلطان</p>
+                        <p style="color: var(--honey); font-size: 24px; margin-top: 15px;">
+                            <i class="fas fa-location-dot"></i> اضغط لفتح الخريطة
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- نموذج الاتصال -->
+            <div class="contact-form-container">
+                <div class="form-title">
+                    <i class="fas fa-paper-plane"></i>
+                    <h2>أرسل لنا رسالة</h2>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" placeholder="الاسم الكامل" required>
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-phone"></i>
+                        <input type="tel" placeholder="رقم الهاتف" required>
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" placeholder="البريد الإلكتروني" required>
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-tag"></i>
+                        <input type="text" placeholder="موضوع الرسالة" required>
+                    </div>
+                    <div class="form-group textarea">
+                        <i class="fas fa-comment"></i>
+                        <textarea placeholder="اكتب رسالتك هنا..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        إرسال الرسالة <i class="fas fa-arrow-left"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- أزرار التواصل السريع -->
+        <div class="quick-contact">
+            <a href="#" class="quick-btn whatsapp">
+                <i class="fab fa-whatsapp"></i>
+                واتساب
+            </a>
+            <a href="#" class="quick-btn phone">
+                <i class="fas fa-phone"></i>
+                اتصال مباشر
+            </a>
+            <a href="#" class="quick-btn email">
+                <i class="fas fa-envelope"></i>
+                راسلنا
+            </a>
+        </div>
+
+        <!-- ساعات العمل -->
+        <div class="hours-section">
+            <div class="hours-title">
+                <i class="fas fa-clock"></i>
+                <h2>ساعات العمل</h2>
+            </div>
+            <div class="hours-grid">
+                <div class="hours-item">
+                    <div class="day">الأحد - الخميس</div>
+                    <div class="time">٨:٠٠ صباحاً - ١٠:٠٠ مساءً</div>
+                    <div class="note">الدوام الرسمي</div>
+                </div>
+                <div class="hours-item">
+                    <div class="day">الجمعة</div>
+                    <div class="time">٢:٠٠ مساءً - ١٠:٠٠ مساءً</div>
+                    <div class="note">دوام مخفض</div>
+                </div>
+                <div class="hours-item">
+                    <div class="day">السبت</div>
+                    <div class="time">١٠:٠٠ صباحاً - ١٠:٠٠ مساءً</div>
+                    <div class="note">دوام كامل</div>
+                </div>
+                <div class="hours-item">
+                    <div class="day">الطوارئ</div>
+                    <div class="time">24/7</div>
+                    <div class="note">اتصل على الرقم الموحد</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الأسئلة الشائعة -->
+        <div class="faq-section">
+            <div class="faq-title">
+                <i class="fas fa-question-circle"></i>
+                <h2>الأسئلة الشائعة</h2>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question"></i>
+                        <h3>كيف أحجز غرفة لحيواني؟</h3>
+                    </div>
+                    <p>يمكنك الحجز بسهولة من خلال صفحة الحجوزات أو الاتصال بنا مباشرة على الرقم الموحد.</p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question"></i>
+                        <h3>ما هي المستندات المطلوبة؟</h3>
+                    </div>
+                    <p>نحتاج إلى بطاقة التطعيمات وشهادة صحية حديثة من طبيب بيطري معتمد.</p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question"></i>
+                        <h3>هل يوجد رعاية بيطرية؟</h3>
+                    </div>
+                    <p>نعم، يوجد فريق طبي بيطري متكامل على مدار الساعة لمتابعة صحة حيواناتكم.</p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question"></i>
+                        <h3>ما هي طرق الدفع المتاحة؟</h3>
+                    </div>
+                    <p>يمكن الدفع نقداً أو عن طريق بطاقات الائتمان (فيزا - ماستركارد) أو التحويل البنكي.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- تذييل الصفحة -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-paw"></i>
+                <span>فندق الحيوانات الفاخر</span>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">الرئيسية</a>
+                <a href="services.html">الخدمات</a>
+                <a href="booking.html">الحجوزات</a>
+                <a href="gallery.html">معرض الكلاب</a>
+                <a href="about.html">من نحن</a>
+                <a href="faq.html">الأسئلة</a>
+                <a href="offers.html">العروض</a>
+                <a href="contact.html">اتصل بنا</a>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-snapchat"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>جميع الحقوق محفوظة &copy; 2024 فندق الحيوانات الفاخر - تصميم وبرمجة احترافية</p>
+        </div>
+    </footer>
+</body>
+</html>
